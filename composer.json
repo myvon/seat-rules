@@ -1,0 +1,36 @@
+{
+  "name": "lvlo/seat-rules",
+  "description": "SeAT Tool to manage corporations and alliances rules",
+  "license": "GPL-2.0",
+  "authors": [
+    {
+      "name": "Morgan YVON",
+      "email": "morgan@elysaa.net"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Lvlo\\Rules\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+    },
+    "classmap": [
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "^7.3"
+  },
+  "require-dev": {
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Lvlo\\Rules\\RulesServiceProvider"
+      ]
+    }
+  }
+}
