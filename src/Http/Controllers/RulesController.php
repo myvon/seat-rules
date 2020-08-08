@@ -30,26 +30,18 @@ class RulesController extends Controller
 
     private function getRules($lang)
     {
-        /** @var CharacterInfo[] $characters */
-        $characters = auth()->user()->characters;
+        /** @var CharacterInfo $characters */
+        $character = auth()->user()->character()->first();
 
         $corporation = null;
         $alliance = null;
 
-        foreach($characters as $character) {
-            /** @var UniverseName $unvierseName */
-            $unvierseName = $character->affiliation->corporation;
-            /** @var CorporationInfo $corporation */
-            $corporations = CorporationInfo::find([$unvierseName->entity_id]);
+        /** @var CorporationInfo $corporation */
+        $corporation = $character->corporation()->first();
 
-            foreach ($corporations as $corp) {
-                $corporation = $corp;
-                $alliance = $corp->alliance()->first();
-
-                if (!$alliance instanceof Alliance) {
-                    $alliance = null;
-                }
-            }
+        $alliance = $corporation->alliance()->first();
+        if (!$alliance instanceof Alliance) {
+            $alliance = null;
         }
 
         $allLanguage = config('web.locale.languages');
