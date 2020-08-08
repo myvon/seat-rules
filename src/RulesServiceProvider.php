@@ -111,6 +111,6 @@ class RulesServiceProvider extends AbstractSeatPlugin
 
     public function getVersion(): string
     {
-        return "1.0.x-dev";
+        return "1.0";
     }
 }
