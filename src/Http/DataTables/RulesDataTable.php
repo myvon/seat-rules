@@ -24,14 +24,14 @@ namespace Lvlo\Rules\Http\DataTables;
 
 use Lvlo\Rules\Models\Rules;
 use Seat\Eveapi\Models\Character\CharacterInfo;
-use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\DataTables;
 
 /**
  * Class CharacterDataTable.
  *
  * @package Seat\Web\Http\DataTables\Character
  */
-class RulesDataTable extends DataTable
+class RulesDataTable extends DataTables
 {
     /**
      * @return \Illuminate\Http\JsonResponse
@@ -84,7 +84,7 @@ class RulesDataTable extends DataTable
     /**
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    public function query($builder)
     {
         return Rules::with([] )->select('*');
     }

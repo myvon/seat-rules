@@ -9,6 +9,7 @@ use Lvlo\Rules\Http\DataTables\RulesDataTable;
 use Lvlo\Rules\Http\Validation\Rule;
 use Lvlo\Rules\Models\Rules;
 use Seat\Eveapi\Models\Alliances\Alliance;
+use Seat\Eveapi\Models\Character\CharacterCorporationHistory;
 use Seat\Eveapi\Models\Character\CharacterInfo;
 use Seat\Eveapi\Models\Corporation\CorporationInfo;
 use Seat\Eveapi\Models\Universe\UniverseName;
@@ -36,8 +37,10 @@ class RulesController extends Controller
         $corporation = null;
         $alliance = null;
 
-        /** @var CorporationInfo $corporation */
-        $corporation = $character->corporation()->first();
+        /** @var CharacterCorporationHistory $corporationHistory */
+        $corporationHistory = $character->corporation();
+
+        $corporation = CorporationInfo::find($corporationHistory->corporation_id);
 
         $alliance = $corporation->alliance()->first();
         if (!$alliance instanceof Alliance) {
@@ -49,9 +52,9 @@ class RulesController extends Controller
         $rules = [
             'corporation' => null,
             'alliance' => null,
-            'corporation_langs' => null,
+            'corporation_langs' => [],
             'corporation_lang' => null,
-            'alliance_langs' => null,
+            'alliance_langs' => [],
             'alliance_lang' => null,
         ];
 
@@ -76,10 +79,10 @@ class RulesController extends Controller
 
                 foreach ($allLanguage as $lang) {
                     if (in_array($lang['short'], $languages)) {
-                        $rules['corporation_langs'] = $lang;
+                        $rules['corporation_langs'][] = $lang;
                     }
-
                 }
+
             }
         }
 
@@ -113,8 +116,7 @@ class RulesController extends Controller
 
     public function listRules(RulesDataTable  $dataTable)
     {
-        return $dataTable
-            ->render('rules::list');
+        return view('rules::list', ['rules' => Rules::all()]);
     }
 
     public function create()

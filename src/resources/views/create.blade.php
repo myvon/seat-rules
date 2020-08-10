@@ -7,12 +7,12 @@
 @section('full')
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-tools">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-tools">
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="panel-body">
                     <div class="media">
                         <div class="media-body">
                             <form method="post" action="{{ route('rules.store') }}" enctype="multipart/form-data" id="squad-form">

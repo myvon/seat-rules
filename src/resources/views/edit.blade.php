@@ -7,12 +7,12 @@
 @section('full')
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="panel">
+                <div class="panel-heading">
                     <div class="card-tools">
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="panel-body">
                     <div class="media">
                         <div class="media-body">
                             <form method="post" action="{{ route('rules.edit.post', ['rule' => $rule->id]) }}" enctype="multipart/form-data" id="squad-form">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="panel-footer">
                     <div class="float-right">
                         <button type="submit" form="squad-form" class="btn btn-success">
                             <i class="fas fa-"></i> Submit

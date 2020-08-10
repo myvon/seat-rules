@@ -5,17 +5,45 @@
 
 @section('full')
 
-    <div class="card card-default">
+    <div class="panel panel-default">
 
-        <div class="card-header">
+        <div class="panel-heading">
             <h3 class="card-title">{{ trans('rules::seat.manage') }}</h3>
         </div>
-        <div class="card-body">
+        <div class="panel-body">
             <a href="{{ route('rules.create') }}" class="btn btn-default mb-2">
                 <i class="fas fa-plus"></i>
                 {{trans('rules::seat.create')}}
             </a><br />
-            {{ $dataTable->table() }}
+            <div class="tab-content">
+
+                <table id="rules-table" class="table compact table-condensed table-hover table-responsive">
+                    <thead>
+                    <tr>
+                        <th>{{ trans('rules::seat.corp_or_alli') }}</th>
+                        <th>{{ trans('rules::seat.language') }}</th>
+                        <th>{{ trans('web::seat.action') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($rules as $rule)
+                        <tr>
+                            <td>
+                                @if($rule->object_type === "alliance")
+                                    @include('web::partials.alliance', ['alliance' => $rule->getObject()])
+                                @else
+                                    @include('web::partials.corporation', ['corporation' => $rule->getObject()])
+                                @endif
+                            </td>
+                            <td>{{$rule->language}}</td>
+                            <td>@include('rules::partials.action', ['rule' => $rule])</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+
+            </div>
+
 
             <a href="{{ route('rules.create') }}" class="btn btn-default">
                 <i class="fas fa-plus"></i>
@@ -27,9 +55,5 @@
 @stop
 
 @push('javascript')
-
-    {{ $dataTable->scripts() }}
-
-    @include('web::includes.javascript.id-to-name')
 
 @endpush

@@ -8,6 +8,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class Rule extends FormRequest
 {
+    public function authorize()
+    {
+
+        return true;
+    }
+
+
     public function rules()
     {
         return [
