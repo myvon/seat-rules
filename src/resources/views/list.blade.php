@@ -30,7 +30,7 @@
                         <tr>
                             <td>
                                 @if($rule->object_type === "alliance")
-                                    @include('web::partials.alliance', ['alliance' => $rule->getObject()])
+                                    {{ $rule->getObject()->name }}
                                 @else
                                     @include('web::partials.corporation', ['corporation' => $rule->getObject()])
                                 @endif
